@@ -1,11 +1,6 @@
 "use client";
 
 import React, { useMemo } from 'react';
-import { Group } from '@visx/group';
-import { AreaClosed, LinePath } from '@visx/shape';
-import { curveMonotoneX } from '@visx/curve';
-import { scaleTime, scaleLinear } from '@visx/scale';
-import { extent, max } from 'd3-array';
 
 interface DataPoint {
     date: Date;
@@ -29,52 +24,61 @@ export const Sparkline = ({
     const innerWidth = width - margin.left - margin.right;
     const innerHeight = height - margin.top - margin.bottom;
 
-    // Scales
-    const xScale = useMemo(
-        () =>
-            scaleTime({
-                range: [0, innerWidth],
-                domain: extent(data, d => d.date) as [Date, Date],
-            }),
-        [innerWidth, data]
-    );
+    const { pathData, areaData } = useMemo(() => {
+        if (!data || data.length < 2) return { pathData: '', areaData: '' };
 
-    const yScale = useMemo(
-        () =>
-            scaleLinear({
-                range: [innerHeight, 0],
-                domain: [0, (max(data, d => d.value) || 0) * 1.2],
-                nice: true,
-            }),
-        [innerHeight, data]
-    );
+        const minDate = Math.min(...data.map(d => d.date.getTime()));
+        const maxDate = Math.max(...data.map(d => d.date.getTime()));
+        const maxValue = Math.max(...data.map(d => d.value)) * 1.2 || 1;
+
+        const dateRange = maxDate - minDate || 1;
+
+        const points = data.map(d => ({
+            x: ((d.date.getTime() - minDate) / dateRange) * innerWidth + margin.left,
+            y: innerHeight - ((d.value / maxValue) * innerHeight) + margin.top
+        }));
+
+        // Create smooth cubic bezier curve
+        let path = `M ${points[0].x},${points[0].y}`;
+
+        for (let i = 0; i < points.length - 1; i++) {
+            const curr = points[i];
+            const next = points[i + 1];
+            const cp1x = curr.x + (next.x - curr.x) / 2;
+            const cp1y = curr.y;
+            const cp2x = curr.x + (next.x - curr.x) / 2;
+            const cp2y = next.y;
+            path += ` C ${cp1x},${cp1y} ${cp2x},${cp2y} ${next.x},${next.y}`;
+        }
+
+        const area = `${path} L ${points[points.length - 1].x},${innerHeight + margin.top} L ${points[0].x},${innerHeight + margin.top} Z`;
+
+        return { pathData: path, areaData: area };
+    }, [data, innerWidth, innerHeight, margin.left, margin.top]);
+
+    const gradientId = `sparkline-gradient-${color.replace('#', '')}`;
 
     return (
-        <svg width={width} height={height}>
-            <Group left={margin.left} top={margin.top}>
-                <AreaClosed<DataPoint>
-                    data={data}
-                    x={d => xScale(d.date) ?? 0}
-                    y={d => yScale(d.value) ?? 0}
-                    yScale={yScale}
-                    fill={`url(#area-gradient-${color.replace('#', '')})`}
-                    curve={curveMonotoneX}
-                />
-                <LinePath<DataPoint>
-                    data={data}
-                    x={d => xScale(d.date) ?? 0}
-                    y={d => yScale(d.value) ?? 0}
-                    stroke={color}
-                    strokeWidth={2}
-                    curve={curveMonotoneX}
-                />
-                <defs>
-                    <linearGradient id={`area-gradient-${color.replace('#', '')}`} x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stopColor={color} stopOpacity={0.4} />
-                        <stop offset="100%" stopColor={color} stopOpacity={0} />
-                    </linearGradient>
-                </defs>
-            </Group>
+        <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} className="overflow-visible">
+            <defs>
+                <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor={color} stopOpacity={0.4} />
+                    <stop offset="100%" stopColor={color} stopOpacity={0} />
+                </linearGradient>
+            </defs>
+            <path
+                d={areaData}
+                fill={`url(#${gradientId})`}
+                stroke="none"
+            />
+            <path
+                d={pathData}
+                fill="none"
+                stroke={color}
+                strokeWidth={2}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+            />
         </svg>
     );
 };
