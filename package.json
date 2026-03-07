@@ -10,10 +10,6 @@
     "format": "biome format --write"
   },
   "dependencies": {
-    "@visx/curve": "^3.12.0",
-    "@visx/group": "^3.12.0",
-    "@visx/scale": "^3.12.0",
-    "@visx/shape": "^3.12.0",
     "clsx": "^2.1.1",
     "framer-motion": "^12.35.0",
     "leaflet": "^1.9.4",
