@@ -51,7 +51,7 @@ export default function Home() {
 
         {/* Stats to Features Divider */}
         <div className="w-full max-w-7xl relative h-24 sm:h-32 flex items-center justify-center pointer-events-none">
-          <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent absolute top-1/2" />
+          <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-slate-200 to-transparent absolute top-1/2" />
         </div>
 
         <div className="w-full pb-24 lg:pb-32">

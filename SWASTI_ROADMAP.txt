@@ -1,0 +1,55 @@
+================================================================================
+🚀 SWASTI - CHECKLIST PENGEMBANGAN FITUR UTAMA (v2.0)
+================================================================================
+
+Berikut adalah pembaharuan tugas berdasarkan pengecekan struktur kode saat ini.
+Silakan kerjakan satu per satu untuk menyempurnakan aplikasi.
+
+---
+[ ] 1. DATA REFACTORING (FONDASI)
+    - [ ] Pindahkan data koordinat 38 Provinsi dari app/(frontend)/peta-risiko/page.tsx 
+          ke file data terpisah (e.g., lib/data/provinces.ts).
+    - [ ] Buat API Endpoint sederhana di app/api/prices/route.ts untuk menggantikan 
+          fungsi random `generateData` di analisis-harga.
+    - [ ] Pastikan semua halaman menggunakan MasterLayout yang sama.
+
+---
+[ ] 2. HALAMAN EARLY WARNING SYSTEM (EWS) - [PRIORITAS]
+    - [ ] Buat file: app/(frontend)/peringatan-dini/page.tsx
+    - [ ] Desain UI menggunakan tema Dark Premium (seperti Analisis Harga).
+    - [ ] Tampilkan 'Alert Cards' untuk wilayah dengan kenaikan harga di atas batas normal.
+    - [ ] Tambahkan tombol "Detail Analisis" yang mengarah ke grafik historis.
+
+---
+[ ] 3. PENYEMPURNAAN PETA RISIKO
+    - [ ] Tambahkan fitur "Fly To" pada LeafletMap saat provinsi dipilih dari Sidebar.
+    - [ ] Implementasikan filtering komoditas pada peta (saat ini filter belum merubah warna peta secara dinamis).
+    - [ ] Tambahkan Legend yang lebih interaktif.
+
+---
+[ ] 4. PREDIKSI HARGA & AI DASHBOARD
+    - [ ] Buat file: app/(frontend)/prediksi/page.tsx
+    - [ ] Masukkan komponen 'Confidence Interval' pada Chart untuk visualisasi ketidakpastian harga.
+    - [ ] Tambahkan section "Faktor Risiko" (cuaca, hari besar, distribusi).
+
+---
+[ ] 5. PUSAT LAPORAN & EXPORT
+    - [ ] Buat file: app/(frontend)/laporan/page.tsx
+    - [ ] Hubungkan API untuk generate PDF laporan bulanan otomatis.
+    - [ ] Aktifkan tombol Download di halaman Analisis Harga.
+
+---
+[ ] 6. REDESIGN BACKEND (PROFESIONALISASI)
+    - [ ] Ubah tema app/(backend)/dashboard dari putih (light) ke tema dark/glassmorphism 
+          agar selaras dengan frontend.
+    - [ ] Buat halaman CRUD Komoditas: app/(backend)/komoditas/page.tsx
+    - [ ] Buat halaman Manajemen User/Dinas: app/(backend)/users/page.tsx
+
+---
+[ ] 7. DEPLOYMENT & CRON JOBS
+    - [ ] Setup Vercel Cron atau Github Actions untuk pengambilan data harga harian.
+    - [ ] Optimasi performa gambar dan bundle size.
+
+================================================================================
+TERUPDATE: 2026-03-18 | Antigravity AI
+================================================================================

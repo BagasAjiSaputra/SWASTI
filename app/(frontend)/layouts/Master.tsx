@@ -32,7 +32,7 @@ export const MasterLayout = ({ children }: { children: React.ReactNode }) => {
     }, []);
 
     return (
-        <div className="min-h-screen selection:bg-primary selection:text-white relative">
+        <div className="min-h-screen bg-slate-50 text-foreground selection:bg-primary selection:text-white relative">
             <div className="noise" />
             <Navbar />
             <main className="relative pt-16 overflow-hidden">

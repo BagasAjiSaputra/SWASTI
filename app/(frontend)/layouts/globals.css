@@ -1,19 +1,29 @@
 @import "tailwindcss";
+ 
+ @font-face {
+   font-family: 'Google Sans Flex';
+   src: url('/font/Google_Sans_Flex/GoogleSansFlex-VariableFont_GRAD,ROND,opsz,slnt,wdth,wght.ttf') format('truetype');
+   font-weight: 100 1000;
+   font-stretch: 25% 150%;
+   font-style: normal;
+   font-display: swap;
+ }
 
 :root {
-  --background: #020617;
-  --foreground: #f8fafc;
+  --background: #f8fafc;
+  --foreground: #020617;
   --primary: #2563eb;
   --primary-foreground: #ffffff;
-  --secondary: #0f172a;
-  --secondary-foreground: #f8fafc;
-  --muted: #1e293b;
-  --muted-foreground: #94a3b8;
+  --secondary: #f1f5f9;
+  --secondary-foreground: #0f172a;
+  --muted: #f1f5f9;
+  --muted-foreground: #64748b;
   --accent: #3b82f6;
   --accent-foreground: #ffffff;
 }
 
 @theme inline {
+  --font-sans: 'Google Sans Flex', ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-primary: var(--primary);
@@ -49,15 +59,16 @@ html.lenis {
 body {
   background-color: var(--background);
   color: var(--foreground);
+  font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 @layer utilities {
   .glass {
-    background: rgba(15, 23, 42, 0.7);
+    background: rgba(255, 255, 255, 0.7);
     backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.05);
   }
 
   .noise {
@@ -67,35 +78,41 @@ body {
     width: 100%;
     height: 100%;
     content: "";
-    opacity: 0.03;
+    opacity: 0.02;
     z-index: 9999;
     pointer-events: none;
     background: url(https://grainy-gradients.vercel.app/noise.svg);
   }
 
-  /* Leaflet Global Styles */
+  /* Leaflet Global Styles - Adjusted for Light Mode */
   .leaflet-container {
-    background: #020617 !important;
+    background: #aad3df !important;
     width: 100%;
     height: 100%;
   }
 
   .leaflet-control-zoom {
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
     border-radius: 12px !important;
     overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
   }
 
   .leaflet-control-zoom-in,
   .leaflet-control-zoom-out {
-    background: rgba(15, 23, 42, 0.9) !important;
-    color: white !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+    background: white !important;
+    color: #1e293b !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
+  }
+
+  .leaflet-control-zoom-in:hover,
+  .leaflet-control-zoom-out:hover {
+    background: #f8fafc !important;
   }
 
   .leaflet-control-attribution {
-    background: transparent !important;
-    color: rgba(255, 255, 255, 0.2) !important;
+    background: rgba(255, 255, 255, 0.5) !important;
+    color: #64748b !important;
     font-size: 8px !important;
   }
 
@@ -109,36 +126,36 @@ body {
   }
 
   .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.1);
     border-radius: 10px;
   }
 
-  /* Fix native select options visibility in dark mode */
+  /* Fix native select options visibility in light mode */
   select option {
-    background-color: #0f172a;
-    color: white;
+    background-color: white;
+    color: #0f172a;
   }
 
-  /* Date Input Dark Mode Fixes */
+  /* Date Input Light Mode Fixes */
   input[type="date"] {
-    color-scheme: dark;
+    color-scheme: light;
   }
 
   input[type="date"]::-webkit-calendar-picker-indicator {
     cursor: pointer;
-    filter: invert(1) brightness(1.5);
-    opacity: 0.7;
+    filter: none;
+    opacity: 0.5;
   }
 
-  /* Custom Leaflet Popup styling */
+  /* Custom Leaflet Popup styling - Adjusted for Light Mode */
   .leaflet-popup-content-wrapper {
-    background: transparent !important;
-    color: white !important;
+    background: white !important;
+    color: #0f172a !important;
     border-radius: 20px !important;
     padding: 0 !important;
     overflow: hidden;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6) !important;
-    border: none !important;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1) !important;
+    border: 1px solid rgba(0, 0, 0, 0.05) !important;
   }
 
   .leaflet-popup-content {
@@ -152,15 +169,15 @@ body {
   }
 
   .leaflet-popup-tip {
-    background: #0f172a !important;
+    background: white !important;
     box-shadow: none !important;
-    border: none !important;
+    border: 1px solid rgba(0, 0, 0, 0.05) !important;
   }
 
   .leaflet-popup-close-button {
-    color: white !important;
+    color: #64748b !important;
     padding: 12px !important;
     z-index: 50;
     font-size: 16px !important;
   }
-}
+}
