@@ -116,7 +116,7 @@ export const Hero = () => {
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.2 }}
-                    className="relative w-full border-y border-white/5 py-1.5 overflow-hidden bg-white/[0.01] backdrop-blur-sm"
+                    className="relative w-full border-y border-slate-200 py-1.5 overflow-hidden bg-white/40 backdrop-blur-sm"
                 >
                     <motion.div
                         animate={{ x: ["0%", "-50%"] }}
@@ -130,14 +130,14 @@ export const Hero = () => {
                         {[...Array(2)].map((_, i) => (
                             <div key={i} className="flex gap-12 items-center">
                                 {priceUpdates.map((item, idx) => (
-                                    <div key={idx} className="flex items-center gap-2 group cursor-pointer py-1">
-                                        <span className="text-[8px] font-bold text-muted-foreground uppercase tracking-widest group-hover:text-white transition-colors">
+                                    <div key={idx} className="flex items-center gap-2 group cursor-pointer py-1 px-3 rounded-md hover:bg-blue-600 transition-all duration-500">
+                                        <span className="text-[8px] font-bold text-muted-foreground group-hover:text-white/70 uppercase tracking-widest transition-colors duration-500">
                                             {item.label}
                                         </span>
-                                        <span className="text-xs font-black text-white">{item.price}</span>
+                                        <span className="text-xs font-black text-foreground group-hover:text-white transition-colors duration-500">{item.price}</span>
                                         <span className={cn(
-                                            "text-[8px] font-bold flex items-center",
-                                            item.up ? "text-green-500" : "text-red-500"
+                                            "text-[8px] font-bold flex items-center transition-colors duration-500",
+                                            item.up ? "text-green-600 group-hover:text-white" : "text-red-600 group-hover:text-white"
                                         )}>
                                             {item.up ? "▲" : "▼"} {item.change}
                                         </span>
@@ -159,7 +159,7 @@ export const Hero = () => {
                             <AnimatePresence mode="wait">
                                 <motion.h1
                                     key={textIndex}
-                                    className="absolute inset-0 text-4xl md:text-5xl xl:text-6xl font-black leading-[1.1] tracking-tight text-white lg:text-left"
+                                    className="absolute inset-0 text-4xl md:text-5xl xl:text-6xl font-black leading-[1.1] tracking-tight text-foreground lg:text-left"
                                 >
                                     {/* Typing Animation for First Part */}
                                     <motion.span
@@ -244,11 +244,11 @@ export const Hero = () => {
                             transition={{ duration: 0.8, delay: 0.2 }}
                             className="flex flex-col sm:flex-row items-center justify-start gap-4 mb-8"
                         >
-                            <Button size="lg" className="h-12 px-8 rounded-xl group shadow-lg shadow-primary/20 text-sm font-bold">
+                            <Button size="lg" className="h-12 px-8 rounded-xl group shadow-lg shadow-primary/10 text-sm font-bold">
                                 Mulai Eksplorasi
                                 <ArrowRight size={16} className="ml-2 group-hover:translate-x-1 transition-transform" />
                             </Button>
-                            <Button variant="outline" size="lg" className="h-12 px-8 rounded-xl backdrop-blur-sm border-white/5 bg-white/5 hover:bg-white/10 text-sm font-bold">
+                            <Button variant="outline" size="lg" className="h-12 px-8 rounded-xl backdrop-blur-sm shadow-sm font-bold">
                                 Lihat Laporan
                             </Button>
                         </motion.div>
@@ -259,16 +259,8 @@ export const Hero = () => {
                             transition={{ duration: 1, delay: 0.5 }}
                             className="flex items-center justify-start gap-3"
                         >
-                            <div className="flex -space-x-2">
-                                {[1, 2, 3].map((i) => (
-                                    <div key={i} className="w-8 h-8 rounded-full border-2 border-background overflow-hidden shadow-lg">
-                                        <img src={`https://i.pravatar.cc/100?u=${i + 40}`} alt="Trusted user" className="w-full h-full object-cover" />
-                                    </div>
-                                ))}
-                            </div>
-                            <p className="text-[10px] text-muted-foreground font-medium grayscale hover:grayscale-0 transition-all cursor-default">
-                                Pilihan <span className="text-white font-bold text-xs">2.4k+</span> analis nasional
-                            </p>
+
+
                         </motion.div>
                     </div>
 
@@ -278,7 +270,7 @@ export const Hero = () => {
                             initial={{ opacity: 0, scale: 0.95, x: 20 }}
                             animate={{ opacity: 1, scale: 1, x: 0 }}
                             transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-                            className="relative z-10 rounded-2xl border border-white/10 bg-slate-900/50 backdrop-blur-3xl p-1.5 shadow-2xl overflow-hidden w-full max-w-[560px] aspect-[16/10] group cursor-pointer"
+                            className="relative z-10 rounded-2xl border border-slate-200 bg-white shadow-2xl overflow-hidden w-full max-w-[560px] aspect-[16/10] group cursor-pointer hover:border-primary transition-all duration-500"
                             onClick={() => setVideoOpen(true)}
                         >
                             <video
@@ -307,15 +299,15 @@ export const Hero = () => {
                         <motion.div
                             animate={{ y: [0, -6, 0] }}
                             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                            className="absolute -top-4 -right-2 z-20 bg-slate-900/95 border border-white/10 p-3 rounded-xl shadow-3xl hidden md:block backdrop-blur-xl"
+                            className="absolute -top-4 -right-2 z-20 bg-white border border-slate-200 p-3 rounded-xl shadow-2xl hidden md:block backdrop-blur-xl group hover:bg-blue-600 hover:border-blue-500 transition-all duration-500"
                         >
                             <div className="flex items-center gap-2.5">
-                                <div className="w-7 h-7 rounded-lg bg-green-500/20 flex items-center justify-center text-green-500">
+                                <div className="w-7 h-7 rounded-lg bg-green-500/10 flex items-center justify-center text-green-600 group-hover:bg-white/20 group-hover:text-white transition-all duration-500">
                                     <TrendingUp size={14} />
                                 </div>
                                 <div>
-                                    <p className="text-[8px] font-bold text-muted-foreground uppercase mb-0.5 tracking-tighter">Live Status</p>
-                                    <p className="text-xs font-black text-white tracking-tight">AI Confidence: 99.2%</p>
+                                    <p className="text-[8px] font-bold text-muted-foreground group-hover:text-white/70 uppercase mb-0.5 tracking-tighter transition-colors duration-500">Video Inflasi</p>
+                                    <p className="text-xs font-black text-foreground group-hover:text-white tracking-tight transition-colors duration-500">Tonton Sekarang</p>
                                 </div>
                             </div>
                         </motion.div>

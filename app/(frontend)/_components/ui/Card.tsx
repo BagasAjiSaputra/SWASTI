@@ -16,11 +16,16 @@ export const Card = ({ children, className, delay = 0 }: CardProps) => {
             viewport={{ once: true, margin: "-10%" }}
             transition={{ duration: 0.8, delay, ease: [0.22, 1, 0.36, 1] }}
             className={cn(
-                'group relative overflow-hidden rounded-[2rem] bg-slate-900/50 border border-white/5 p-8 md:p-10 backdrop-blur-2xl hover:bg-slate-900/60 hover:border-primary/30 transition-all duration-700 shadow-xl hover:shadow-[0_0_40px_rgba(37,99,235,0.1)] hover:-translate-y-1',
+                'group relative overflow-hidden rounded-3xl bg-white/70 border border-slate-200/60 p-7 backdrop-blur-2xl transition-all duration-700 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_50px_rgba(59,130,246,0.15)] hover:bg-blue-600 hover:border-blue-500 hover:text-white',
                 className
             )}
         >
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+            {/* Soft Glow Effect on Hover */}
+            <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+            
+            {/* Animated Bottom Glow */}
+            <div className="absolute -bottom-1/2 -left-1/2 w-full h-full bg-blue-400/20 blur-[100px] opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none" />
+
             <div className="relative z-10">
                 {children}
             </div>

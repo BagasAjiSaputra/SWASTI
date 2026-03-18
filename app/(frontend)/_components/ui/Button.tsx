@@ -18,10 +18,10 @@ export const Button = ({
     ...props
 }: ButtonProps) => {
     const variants = {
-        primary: 'bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/20',
-        secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
-        ghost: 'bg-transparent hover:bg-white/10 text-foreground',
-        outline: 'bg-transparent border border-white/20 hover:bg-white/5 text-foreground'
+        primary: 'bg-primary text-white hover:bg-blue-700 shadow-lg shadow-primary/20 transition-all duration-300',
+        secondary: 'bg-slate-100 text-slate-900 hover:bg-blue-600 hover:text-white transition-all duration-300',
+        ghost: 'bg-transparent hover:bg-blue-600 hover:text-white text-foreground transition-all duration-300',
+        outline: 'bg-transparent border border-slate-200 hover:bg-blue-600 hover:text-white hover:border-blue-500 text-foreground font-semibold transition-all duration-300'
     };
 
     const sizes = {
