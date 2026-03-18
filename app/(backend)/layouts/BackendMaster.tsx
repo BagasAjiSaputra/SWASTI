@@ -1,7 +1,12 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Roboto_Flex } from "next/font/google";
 import "./globals.css";
 import { Sidebar } from "../_components/Sidebar";
+
+const robotoFlex = Roboto_Flex({
+    subsets: ["latin"],
+    variable: "--font-roboto-flex",
+});
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -26,14 +31,14 @@ export default function BackendLayout({
     return (
         <html lang="en">
             <body
-                className={`${geistSans.variable} ${geistMono.variable} antialiased bg-slate-100 text-slate-900`}
+                className={`${robotoFlex.variable} ${geistMono.variable} antialiased bg-slate-50 text-slate-900 font-sans`}
             >
-                <div className="flex h-screen overflow-hidden">
-                    <div className="hidden md:block h-full">
+                <div className="flex h-screen overflow-hidden relative">
+                    <div className="hidden md:block h-full relative z-20">
                         <Sidebar />
                     </div>
 
-                    <main className="flex-1 overflow-y-auto p-8 bg-white/50 backdrop-blur-sm relative">
+                    <main className="flex-1 overflow-y-auto p-12 bg-white relative z-10 border-l border-slate-100 shadow-sm">
                         {children}
                     </main>
                 </div>

@@ -24,16 +24,16 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "./*"
-      ],
       "@/frontend/*": [
         "./app/(frontend)/*"
       ],
       "@/backend/*": [
         "./app/(backend)/*"
+      ],
+      "@/*": [
+        "./*"
       ]
-    } 
+    }
   },
   "include": [
     "next-env.d.ts",

@@ -1,48 +1,59 @@
 "use client";
 
 import React from 'react';
-import { Card } from '@/backend/_components/ui/Card';
+import { Card } from '../_components/ui/Card';
+import { Button } from '../_components/ui/Button';
 import { TrendingUp, Users, ShoppingCart, Activity } from 'lucide-react';
 
 export default function Dashboard() {
     return (
         <div className="max-w-7xl mx-auto space-y-8">
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                <h1 className="text-3xl font-black text-slate-900 tracking-tight">Overview Dashboard</h1>
-                <div className="px-4 py-2 bg-slate-900 text-white text-xs font-bold rounded-lg uppercase tracking-widest">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                <div>
+                    <h1 className="text-2xl font-black text-slate-900 tracking-tighter italic">Dashboard <span className="text-primary not-italic">Overview</span></h1>
+                    <p className="text-slate-400 font-bold mt-1 text-xs">Monitoring system SWASTI secara real-time.</p>
+                </div>
+                <div className="px-5 py-2.5 bg-slate-900 text-white text-[9px] font-black rounded-2xl uppercase tracking-[0.2em] shadow-2xl shadow-slate-200 cursor-default">
                     Live Data Monitoring
                 </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {[
-                    { label: 'Total Users', value: '12,450', icon: Users, color: 'blue' },
-                    { label: 'Active Price Feeds', value: '458', icon: Activity, color: 'green' },
-                    { label: 'Market Transactions', value: '89,120', icon: ShoppingCart, color: 'purple' },
-                    { label: 'Inflasi Index', value: '5.2%', icon: TrendingUp, color: 'red' },
+                    { label: 'Total Users', value: '12,450', icon: Users, color: 'text-blue-600', bg: 'bg-blue-50' },
+                    { label: 'Active Price Feeds', value: '458', icon: Activity, color: 'text-emerald-600', bg: 'bg-emerald-50' },
+                    { label: 'Market Transactions', value: '89,120', icon: ShoppingCart, color: 'text-purple-600', bg: 'bg-purple-50' },
+                    { label: 'Inflasi Index', value: '5.2%', icon: TrendingUp, color: 'text-red-600', bg: 'bg-red-50' },
                 ].map((item, i) => (
-                    <div key={i} className="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm hover:shadow-md transition-all group">
+                    <Card key={i} className="p-6 hover:scale-[1.02] transition-transform shadow-sm">
                         <div className="flex justify-between items-start mb-4">
-                            <div className="text-slate-400 font-bold text-[10px] uppercase tracking-widest">{item.label}</div>
-                            <item.icon className="text-slate-900 opacity-20 group-hover:opacity-100 transition-opacity" size={20} />
+                            <div className="text-slate-300 font-black text-[8px] uppercase tracking-[0.3em]">{item.label}</div>
+                            <div className={`w-8 h-8 rounded-lg ${item.bg} ${item.color} flex items-center justify-center group-hover:rotate-12 transition-transform`}>
+                                <item.icon size={16} />
+                            </div>
                         </div>
-                        <div className="text-3xl font-black text-slate-900">{item.value}</div>
-                        <div className="text-[10px] items-center flex gap-1 mt-2 text-green-600 font-bold">
-                            <TrendingUp size={12} /> +2.4% vs last month
+                        <div className="text-3xl font-black text-slate-900 tracking-tighter leading-none">{item.value}</div>
+                        <div className="text-[9px] items-center flex gap-1 mt-3 text-emerald-500 font-black uppercase tracking-widest">
+                            <TrendingUp size={12} /> +2.4%
                         </div>
-                    </div>
+                    </Card>
                 ))}
             </div>
 
-            <div className="bg-white p-8 rounded-[2.5rem] border border-slate-200 shadow-sm min-h-[400px] flex items-center justify-center">
-                <div className="text-center space-y-4">
-                    <div className="text-slate-300 font-black text-6xl opacity-20 italic">BACKEND AREA</div>
-                    <p className="text-slate-500 font-medium">Main dashboard charts and analysis will be integrated here.</p>
-                    <div className="px-6 py-3 bg-slate-900 text-white font-bold rounded-xl inline-block hover:scale-105 transition-transform cursor-pointer">
-                        Update Report
+            <Card className="p-12 flex items-center justify-center relative overflow-hidden group min-h-[400px] border-slate-200 rounded-2xl shadow-xl shadow-slate-100">
+                <div className="text-center space-y-8 relative z-10">
+                    <div className="w-16 h-16 bg-slate-900 rounded-xl flex items-center justify-center mx-auto mb-6 group-hover:rotate-6 transition-all duration-700 shadow-2xl shadow-slate-200">
+                        <Activity className="text-white w-6 h-6" />
                     </div>
+                    <div>
+                        <div className="text-slate-900 font-black text-6xl mb-3 tracking-tighter select-none leading-none">SWASTI</div>
+                        <p className="text-slate-400 font-bold max-w-sm mx-auto leading-relaxed text-[9px] uppercase tracking-widest">Sistem Integrasi Data Utama Nasional</p>
+                    </div>
+                    <Button variant="primary" className="px-10 py-5 text-sm rounded-xl">
+                        Update Data Report
+                    </Button>
                 </div>
-            </div>
+            </Card>
         </div>
     );
 }

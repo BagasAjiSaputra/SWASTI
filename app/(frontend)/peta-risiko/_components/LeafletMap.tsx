@@ -68,7 +68,10 @@ const MapController = ({ activeProvince, selectedCommodity, isSidebarOpen }: { a
             const delay = isSidebarOpen ? 100 : 400; 
             
             setTimeout(() => {
-                map.setView(activeProvince.coords, 7, { animate: true });
+                map.flyTo(activeProvince.coords, 8, { 
+                    duration: 1.5,
+                    easeLinearity: 0.25
+                });
                 
                 // Wait for pan to finish before opening popup
                 setTimeout(() => {
@@ -114,7 +117,11 @@ export default function LeafletMap({ provinces, onProvinceClick, selectedCommodi
                 <Marker
                     key={index}
                     position={prov.coords}
-                    icon={createCustomMarker(prov.risk === 'Tinggi' ? '#ef4444' : (prov.risk === 'Sedang' ? '#f59e0b' : '#10b981'))}
+                    icon={createCustomMarker(
+                        selectedCommodity !== "Semua Komoditas (IHK)" 
+                        ? (index % 3 === 0 ? '#ef4444' : (index % 2 === 0 ? '#f59e0b' : '#10b981'))
+                        : (prov.risk === 'Tinggi' ? '#ef4444' : (prov.risk === 'Sedang' ? '#f59e0b' : '#10b981'))
+                    )}
                     eventHandlers={{
                         click: () => onProvinceClick(prov),
                     }}

@@ -1,55 +1,202 @@
-================================================================================
-🚀 SWASTI - CHECKLIST PENGEMBANGAN FITUR UTAMA (v2.0)
-================================================================================
+{
+  "project_name": "SWASTI - Sistem Early Warning Inflasi Pangan",
+  "tech_stack": {
+    "frontend_backend": "Next.js (Fullstack)",
+    "machine_learning": "Flask + Jupyter Notebook",
+    "database": "Supabase PostgreSQL",
+    "visualization": ["Chart.js", "ECharts"],
+    "map": "Leaflet"
+  },
 
-Berikut adalah pembaharuan tugas berdasarkan pengecekan struktur kode saat ini.
-Silakan kerjakan satu per satu untuk menyempurnakan aplikasi.
+  "roles": ["admin", "analis", "petani", "publik"],
 
----
-[ ] 1. DATA REFACTORING (FONDASI)
-    - [ ] Pindahkan data koordinat 38 Provinsi dari app/(frontend)/peta-risiko/page.tsx 
-          ke file data terpisah (e.g., lib/data/provinces.ts).
-    - [ ] Buat API Endpoint sederhana di app/api/prices/route.ts untuk menggantikan 
-          fungsi random `generateData` di analisis-harga.
-    - [ ] Pastikan semua halaman menggunakan MasterLayout yang sama.
+  "system_architecture": {
+    "services": [
+      {
+        "name": "Next.js App",
+        "responsibility": [
+          "UI Dashboard",
+          "API Route",
+          "Auth & RBAC",
+          "Fetch data dari Supabase",
+          "Call Flask API"
+        ]
+      },
+      {
+        "name": "Flask ML Service",
+        "responsibility": [
+          "Preprocessing data",
+          "Training model",
+          "Prediksi harga",
+          "Hitung inflasi",
+          "Analisis risiko"
+        ]
+      },
+      {
+        "name": "Supabase",
+        "responsibility": [
+          "Database PostgreSQL",
+          "Authentication",
+          "Storage laporan"
+        ]
+      }
+    ]
+  },
 
----
-[ ] 2. HALAMAN EARLY WARNING SYSTEM (EWS) - [PRIORITAS]
-    - [ ] Buat file: app/(frontend)/peringatan-dini/page.tsx
-    - [ ] Desain UI menggunakan tema Dark Premium (seperti Analisis Harga).
-    - [ ] Tampilkan 'Alert Cards' untuk wilayah dengan kenaikan harga di atas batas normal.
-    - [ ] Tambahkan tombol "Detail Analisis" yang mengarah ke grafik historis.
+  "pages": {
+    "public": [
+      "Landing Page",
+      "Harga Komoditas",
+      "Inflasi Nasional",
+      "Grafik Visualisasi"
+    ],
+    "admin": [
+      "Dashboard Admin",
+      "Kelola User",
+      "Kelola Komoditas",
+      "Kelola Harga",
+      "Kelola Model ML",
+      "Generate Laporan",
+      "Monitoring Sistem"
+    ],
+    "analis": [
+      "Dashboard Nasional",
+      "Prediksi Harga",
+      "Peta Risiko Inflasi",
+      "Analisis Tren",
+      "Laporan"
+    ],
+    "petani": [
+      "Dashboard Petani",
+      "Tren Harga",
+      "Prediksi Harga",
+      "Risiko Wilayah"
+    ]
+  },
 
----
-[ ] 3. PENYEMPURNAAN PETA RISIKO
-    - [ ] Tambahkan fitur "Fly To" pada LeafletMap saat provinsi dipilih dari Sidebar.
-    - [ ] Implementasikan filtering komoditas pada peta (saat ini filter belum merubah warna peta secara dinamis).
-    - [ ] Tambahkan Legend yang lebih interaktif.
+  "features": {
+    "core": [
+      "Dashboard Nasional",
+      "Prediksi Harga Komoditas",
+      "Peta Risiko Inflasi",
+      "Early Warning System",
+      "Analisis Tren Harga",
+      "Export Laporan"
+    ],
+    "advanced": [
+      "AI Recommendation (Waktu jual terbaik)",
+      "Insight otomatis (kenaikan harga)",
+      "Ranking komoditas",
+      "Open API"
+    ]
+  },
 
----
-[ ] 4. PREDIKSI HARGA & AI DASHBOARD
-    - [ ] Buat file: app/(frontend)/prediksi/page.tsx
-    - [ ] Masukkan komponen 'Confidence Interval' pada Chart untuk visualisasi ketidakpastian harga.
-    - [ ] Tambahkan section "Faktor Risiko" (cuaca, hari besar, distribusi).
+  "api_design": {
+    "nextjs": [
+      "/api/harga",
+      "/api/prediksi",
+      "/api/inflasi",
+      "/api/risk",
+      "/api/dashboard",
+      "/api/report"
+    ],
+    "flask": [
+      "/predict",
+      "/train",
+      "/inflation",
+      "/risk",
+      "/preprocess"
+    ]
+  },
 
----
-[ ] 5. PUSAT LAPORAN & EXPORT
-    - [ ] Buat file: app/(frontend)/laporan/page.tsx
-    - [ ] Hubungkan API untuk generate PDF laporan bulanan otomatis.
-    - [ ] Aktifkan tombol Download di halaman Analisis Harga.
+  "database": {
+    "tables": [
+      "profiles",
+      "komoditas",
+      "provinsi",
+      "kabupaten",
+      "harga",
+      "prediksi",
+      "inflasi",
+      "risk_analysis",
+      "ml_models",
+      "notifications",
+      "reports",
+      "system_logs",
+      "early_warning",
+      "user_favorites",
+      "dashboard_cache"
+    ]
+  },
 
----
-[ ] 6. REDESIGN BACKEND (PROFESIONALISASI)
-    - [ ] Ubah tema app/(backend)/dashboard dari putih (light) ke tema dark/glassmorphism 
-          agar selaras dengan frontend.
-    - [ ] Buat halaman CRUD Komoditas: app/(backend)/komoditas/page.tsx
-    - [ ] Buat halaman Manajemen User/Dinas: app/(backend)/users/page.tsx
+  "ml_pipeline": [
+    "Ambil data harga",
+    "Preprocessing data",
+    "Training model (LSTM/XGBoost)",
+    "Prediksi harga",
+    "Hitung inflasi",
+    "Hitung risk level",
+    "Simpan ke database"
+  ],
 
----
-[ ] 7. DEPLOYMENT & CRON JOBS
-    - [ ] Setup Vercel Cron atau Github Actions untuk pengambilan data harga harian.
-    - [ ] Optimasi performa gambar dan bundle size.
+  "development_plan": {
+    "phase_1_setup": [
+      "Setup Next.js project",
+      "Setup Supabase project",
+      "Setup Flask ML service",
+      "Setup koneksi Next.js ke Supabase"
+    ],
 
-================================================================================
-TERUPDATE: 2026-03-18 | Antigravity AI
-================================================================================
+    "phase_2_database": [
+      "Create semua tabel PostgreSQL",
+      "Relasi dan index",
+      "Seeder data dummy"
+    ],
+
+    "phase_3_auth": [
+      "Implement Supabase Auth",
+      "Role-based access (admin, analis, petani)",
+      "Middleware proteksi route"
+    ],
+
+    "phase_4_core_features": [
+      "Dashboard nasional",
+      "CRUD komoditas",
+      "CRUD harga",
+      "Grafik harga"
+    ], phases_5_9: [
+      "ML Integration",
+      "Advanced Features",
+      "Reporting",
+      "Optimization",
+      "Deployment"
+    ]
+  },
+
+  "task_breakdown": {
+    "frontend": [
+      "Buat layout dashboard",
+      "Buat sidebar role-based",
+      "Buat halaman grafik",
+      "Integrasi API ke UI"
+    ],
+    "backend_nextjs": [
+      "Buat API route",
+      "Integrasi Supabase",
+      "Integrasi Flask API",
+      "Middleware auth"
+    ],
+    "ml_flask": [
+      "Setup Flask API",
+      "Buat endpoint /predict",
+      "Buat endpoint /risk",
+      "Training model di Jupyter"
+    ],
+    "database": [
+      "Design schema",
+      "Implement di Supabase",
+      "Seeder data",
+      "Testing query"
+    ]
+  }
+}
