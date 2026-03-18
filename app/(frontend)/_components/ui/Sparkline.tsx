@@ -56,28 +56,29 @@ export const Sparkline = ({
         return { pathData: path, areaData: area };
     }, [data, innerWidth, innerHeight, margin.left, margin.top]);
 
-    const gradientId = `sparkline-gradient-${color.replace('#', '')}`;
-
-    return (
-        <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} className="overflow-visible">
+    const gradientId = useMemo(() => `sparkline-gradient-${Math.random().toString(36).substr(2, 9)}`, []);
+ 
+     return (
+        <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} className="overflow-visible transition-colors duration-500">
             <defs>
                 <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stopColor={color} stopOpacity={0.4} />
-                    <stop offset="100%" stopColor={color} stopOpacity={0} />
+                    <stop offset="0%" stopColor="currentColor" stopOpacity={0.4} />
+                    <stop offset="100%" stopColor="currentColor" stopOpacity={0} />
                 </linearGradient>
             </defs>
             <path
                 d={areaData}
                 fill={`url(#${gradientId})`}
-                stroke="none"
+                className="transition-all duration-500"
             />
             <path
                 d={pathData}
                 fill="none"
-                stroke={color}
+                stroke="currentColor"
                 strokeWidth={2}
                 strokeLinecap="round"
                 strokeLinejoin="round"
+                className="transition-all duration-500"
             />
         </svg>
     );

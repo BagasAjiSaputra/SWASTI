@@ -15,6 +15,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "SWASTI | Solusi Informasi Harga Pangan",
   description: "Navigasi ekonomi lebih cerdas bersama SWASTI. Pantau harga pangan nasional secara real-time.",
+  icons: {
+    icon: "/logo/logoswasti.webp",
+  },
 };
 
 export default function RootLayout({
